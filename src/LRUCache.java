@@ -8,7 +8,8 @@ public class LRUCache<K, V> {
     private int capacity;
     private int size;
 
-    public LRUCache(int capacity){
+    public LRUCache(int capacity) throws InstantiationException {
+        if (capacity <= 1) throw new InstantiationException("Cache capacity must be > 1");
         this.capacity = capacity;
         this.size = 0;
         LRU = new Node<>(null, null, null, null);
@@ -16,7 +17,7 @@ public class LRUCache<K, V> {
         cache = new HashMap<>();
     }
 
-    public V get(K key){
+    public V get(K key) {
         Node<K, V> tempNode = cache.get(key);
         if (tempNode == null){ // not found in cache
             return null;
@@ -44,7 +45,7 @@ public class LRUCache<K, V> {
         return tempNode.value;
     }
 
-    public void set(K key, V value){
+    public void set(K key, V value) {
         if (get(key) != null) { // If already exists, do a generic get and then update
             cache.get(key).value = value;
             return;
@@ -68,7 +69,7 @@ public class LRUCache<K, V> {
         Node<T, U> next;
         T key; U value;
 
-        Node(Node<T, U> previous, Node<T, U> next, T key, U value){
+        Node(Node<T, U> previous, Node<T, U> next, T key, U value) {
             this.previous = previous;
             this.next = next;
             this.key = key;

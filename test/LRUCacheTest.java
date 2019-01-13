@@ -6,7 +6,11 @@ public class LRUCacheTest {
     private LRUCache<Integer, Integer> c;
 
     public LRUCacheTest() {
-        this.c = new LRUCache<>(2);
+        try {
+            this.c = new LRUCache<>(2);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
